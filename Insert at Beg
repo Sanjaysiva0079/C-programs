@@ -26,4 +26,9 @@ void display(){
 int main()
 {
     insertAtbegining(6);
+    insertAtbegining(2);
+    insertAtbegining(8);
+
+    
+    
 }
