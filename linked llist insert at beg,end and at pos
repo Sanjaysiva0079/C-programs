@@ -1,0 +1,111 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node {
+    int data;
+    struct node *next;
+};
+
+struct node *head = NULL;
+struct node *temp = NULL;
+
+void create(int data)
+{
+    struct node *newnode = (struct node*)malloc(sizeof(struct node));
+
+    newnode->data = data;
+    newnode->next = NULL;
+
+    if (head == NULL) {
+        head = temp = newnode;
+    } else {
+        temp->next = newnode;
+        temp = newnode;
+    }
+}
+
+void insertatbegin(int data)
+{
+    struct node *newnode=(struct node *)malloc(sizeof(struct node));
+    newnode->data=data;
+    newnode->next=head;
+    head=newnode;
+    
+}
+
+void insertatend(int data)
+{
+    struct node *newnode=(struct node *)malloc(sizeof(struct node));
+    newnode->data=data;
+    newnode->next=NULL;
+    
+    if (head==NULL)
+    {
+        head=newnode;
+    }
+    struct node *temp=head;
+    while(temp->next!=NULL)
+    {
+        temp=temp->next;
+    }
+    temp->next=newnode;
+
+}
+
+void insertatpos(int data,int position)
+{
+    struct node *newnode=(struct node *)malloc(sizeof(struct node));
+    newnode->data=data;
+    newnode->next=NULL;
+    
+    if(head==NULL)
+    {
+        newnode->next=head;
+        head=newnode;
+    }
+    struct node *temp=head;
+    for(int i=1;i<position-1&&temp !=NULL;i++)
+    {
+        temp=temp->next;
+    }
+    newnode->next=temp->next;
+    temp->next=newnode;
+}
+
+void display()
+{
+    struct node *temp = head;
+    while (temp != NULL) {
+        printf("%d -> ", temp->data);
+        temp = temp->next;
+    }
+    printf("NULL\n");
+}
+
+int main()
+{
+    int n, value,newvalue,endvalue;
+    int poss,positionvalue;
+
+    
+    scanf("%d", &n);
+
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &value);
+        create(value);
+    }
+    printf("enter the values to insert at beg");
+    scanf("%d",&newvalue);
+    insertatbegin(newvalue);
+    
+    printf("enter the values to insert at end");
+    scanf("%d",&endvalue);
+    insertatend(endvalue);
+    
+    printf("enter the values to insert at pos");
+    scanf("%d%d",&poss,&positionvalue);
+    insertatpos(poss,positionvalue);
+
+    display();
+    return 0;
+}
