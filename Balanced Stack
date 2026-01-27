@@ -1,0 +1,73 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node {
+    int data;
+    struct node *next;
+};
+
+void push(int val, struct node **top) {
+    struct node *newnode = (struct node*)malloc(sizeof(struct node));
+    newnode->data = val;
+    newnode->next = *top;
+    *top = newnode;
+}
+
+int pop(struct node **top) {
+    if (*top == NULL) return 0;
+    struct node *temp = *top;
+    int val = temp->data;
+    *top = temp->next;
+    free(temp);
+    return val;
+}
+
+int main() {
+    int n1, n2, n3;
+    scanf("%d %d %d", &n1, &n2, &n3);
+
+    int h1[n1], h2[n2], h3[n3];
+    int sum1 = 0, sum2 = 0, sum3 = 0;
+
+    for(int i=0;i<n1;i++){
+        scanf("%d",&h1[i]);
+        sum1 += h1[i];
+    }
+    for(int i=0;i<n2;i++){
+        scanf("%d",&h2[i]);
+        sum2 += h2[i];
+    }
+    for(int i=0;i<n3;i++){
+        scanf("%d",&h3[i]);
+        sum3 += h3[i];
+    }
+
+    struct node *s1 = NULL, *s2 = NULL, *s3 = NULL;
+
+    for(int i=n1-1;i>=0;i--) push(h1[i], &s1);
+    for(int i=n2-1;i>=0;i--) push(h2[i], &s2);
+    for(int i=n3-1;i>=0;i--) push(h3[i], &s3);
+
+    while(1) {
+        if(s1 == NULL || s2 == NULL || s3 == NULL) {
+            printf("0");
+            return 0;
+        }
+
+        if(sum1 == sum2 && sum2 == sum3) {
+            printf("%d", sum1);
+            return 0;
+        }
+
+        if(sum1 >= sum2 && sum1 >= sum3) {
+            sum1 -= pop(&s1);
+        }
+        else if(sum2 >= sum1 && sum2 >= sum3) {
+            sum2 -= pop(&s2);
+        }
+        else {
+            sum3 -= pop(&s3);
+        }
+    }
+    return 0;
+}
