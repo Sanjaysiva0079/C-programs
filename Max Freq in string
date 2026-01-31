@@ -1,0 +1,30 @@
+#include <stdio.h>
+
+int main()
+{
+   char str[20];
+   scanf("%s",&str);
+   int max=0;
+   char res;
+   for(int i=0;str[i]!='\0';i++)
+   {
+       int count=0;
+        for(int j=0;str[j]!='\0';j++)
+        {
+            if(str[i]==str[j])
+            count++;
+        }
+   
+if (max<count)
+{
+    max=count;
+    res=str[i];
+}
+}
+printf("%c",res);
+
+
+
+
+    return 0;
+}
