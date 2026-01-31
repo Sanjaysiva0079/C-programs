@@ -1,0 +1,29 @@
+
+#include<string.h>
+#include <stdio.h>
+#include<ctype.h>
+
+int main()
+{
+  char str[20];
+  
+  scanf("%s",str);
+  char res[20];
+  int k=0;
+ for(int i=0;str[i]!='\0';i++)
+ {
+     if(islower(str[i]))
+     {
+         res[k++]=str[i];
+     }
+ }
+    for(int i=0;str[i]!='\0';i++)
+    {
+          if(isupper(str[i]))
+          {
+               res[k++]=str[i];
+          }
+    }
+    printf("%s",res);
+    return 0;
+}
